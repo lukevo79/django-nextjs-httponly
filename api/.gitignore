@@ -1,0 +1,27 @@
+# File e cartelle da ignorare in un progetto Django
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.swp
+*.swo
+.DS_Store
+.env
+.env.*
+*.env
+local_settings.py
+instance/
+media/
+staticfiles/
+
+# Cartelle di cache di Django
+*.migrations/
+
+# File generati da editor
+.vscode/
+.idea/ 

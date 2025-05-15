@@ -1,0 +1,20 @@
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: bp_api
+    restart: always
+    volumes:
+      - ./api:/usr/src/app
+    ports:
+      - "8000:8000"
+    networks:
+      - backend
+    environment:
+       - PYTHONDONTWRITEBYTECODE=1
+       - PYTHONUNBUFFERED=1
+       - DJANGO_DEBUG=True
+    command: python manage.py runserver 0.0.0.0:8000
+networks:
+  backend:

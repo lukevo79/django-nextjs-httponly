@@ -1,0 +1,5 @@
+# Escludi i file e le cartelle di Cursor
+.cursor/
+cursor.log
+.cursor-config.json
+.cursor-history/ 

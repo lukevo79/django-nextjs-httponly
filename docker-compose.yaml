@@ -1,10 +1,35 @@
 services:
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    container_name: bp_mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - bp_mysql_data:/var/lib/mysql
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
   api:
     build:
       context: ./api
       dockerfile: Dockerfile
     container_name: bp_api
     restart: always
+    depends_on:
+      db:
+        condition: service_healthy
     volumes:
       - ./api:/usr/src/app
     ports:
@@ -16,5 +41,7 @@ services:
        - PYTHONUNBUFFERED=1
        - DJANGO_DEBUG=True
     command: python manage.py runserver 0.0.0.0:8000
+volumes:
+  bp_mysql_data:
 networks:
   backend:

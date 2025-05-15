@@ -3,3 +3,6 @@
 cursor.log
 .cursor-config.json
 .cursor-history/ 
+
+# Escludi i files env
+.env

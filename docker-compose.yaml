@@ -40,6 +40,10 @@ services:
        - PYTHONDONTWRITEBYTECODE=1
        - PYTHONUNBUFFERED=1
        - DJANGO_DEBUG=True
+       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+       - MYSQL_DATABASE=${MYSQL_DATABASE}
+       - MYSQL_USER=${MYSQL_USER}
+       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     command: python manage.py runserver 0.0.0.0:8000
 volumes:
   bp_mysql_data:
